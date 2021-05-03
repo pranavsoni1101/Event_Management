@@ -17,5 +17,6 @@
   },
   "homepage": "https://github.com/pranavsoni1101/Event_Management#readme",
   "dependencies": {
+    "express": "^4.17.1"
   }
 }
