@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700&display=swap');
+
+body{
+    font-family: 'Nunito', sans-serif;
+}
+
+.landing-container{
+    position: relative;
+    background-image: url("https://images.unsplash.com/photo-1425421598808-4a22ce59cc97?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80") !important;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+.landing-text {
+    margin-top: 11.5em !important;
+    padding: 2em;    
+    backdrop-filter: blur(5px);
+    color: white;
+}
+
+.landing-text h1{
+    font-size: 5em;
+}
+
+.landing-text p {
+    font-weight: 500;
+}
+
+.card{
+    padding: 2em;
+    width: 50% !important;
+    margin: 5em auto !important;
+}

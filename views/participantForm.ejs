@@ -1,0 +1,25 @@
+<%- include ("partials/header") %>
+
+<div class="container">
+    <div class="container card">
+        <h1 class="text-center mb-3">Add a Participant</h1>
+        <div id="center">
+            <form action="/participantForm" method="POST">
+                <div class="form-group mb-3">
+                    <input class= "form-control" type="text" name="name" placeholder="Name">
+                </div>
+                <div class="form-group mb-3">
+                    <input class= "form-control" type="email" name="email" placeholder="Email-id">
+                </div>
+                <div class="form-group mb-3">
+                    <input class= "form-control" type="text" name="age" placeholder="Age">
+                </div>
+                <div class="d-grid gap-2">
+                    <button class="btn btn-outline-success" type="button">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include ("partials/footer") %> 
