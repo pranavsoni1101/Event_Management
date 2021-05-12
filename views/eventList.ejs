@@ -1,0 +1,45 @@
+<%- include ("partials/header") %>
+
+<table class="table table-dark table-striped">
+    <tr>
+        <th>Sr. No.</th>
+        <th>Event Name</th>
+        <th>Event Location</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Price</th>
+        <th>No. of Participants</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+
+    <%
+        if(eventData.length !=0){
+            let i = 1;
+            eventData.forEach((data) => {  
+     %> 
+            <tr>
+                <td> <%= i; %> </td>
+                <td><%= data.ename %></td>
+                <td><%= data.location %></td>
+                <td><%= data.edate %></td>
+                <td><%= data.etime %></td>
+                <td><%= data.price %></td>
+                <td><%= data.nparticipants %></td>
+                <td><a class="btn btn-outline-warning"  href="/eventForm/edit/<%=data.uuid%>">Edit</a></td>
+                <td><a class="btn btn-outline-danger"  href="/eventForm/delete/<%=data.uuid%>">Delete</a></td>
+            </tr>
+            <% 
+                i++; }) 
+            %>
+    <% 
+        }
+        else { 
+    %>
+    <tr>
+        <td>No Data Found1</td>
+    </tr>
+    <% } %>
+</table>
+
+<%- include ("partials/footer") %>

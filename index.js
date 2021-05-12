@@ -29,9 +29,10 @@ app.get('/eventForm', (req, res) => {
     res.render("eventForm");
 });
 
+// To store data into the db
 app.post('/eventForm/add', (req, res) => {
     const eventDetails = req.body;
-    var sql = `INSERT INTO etable (ename , edate, etime, price, uuid) VALUES ("${eventDetails.ename}", "${eventDetails.date}", "${eventDetails.time}", ${eventDetails.price}, "${uuidv4()}")`;
+    let sql = `INSERT INTO etable (ename , edate, etime, price, uuid) VALUES ("${eventDetails.ename}", "${eventDetails.date}", "${eventDetails.time}", ${eventDetails.price}, "${uuidv4()}")`;
     db.query(sql, (err, data) => {
         if(err){
             throw err;
@@ -39,6 +40,17 @@ app.post('/eventForm/add', (req, res) => {
         console.log("Data successfully inserted");
     });
     res.redirect("/");
+});
+
+// To fetch data from the database
+app.get('/event-details', (req, res) =>{
+    let sql = "SELECT * FROM etable";
+    db.query(sql, (err, data) =>{
+        if(err){
+            throw err;
+        }
+        res.render("eventList", {title: "Event List", eventData: data});
+    });
 });
 
 //Participant Registration form
