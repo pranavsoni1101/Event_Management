@@ -32,15 +32,42 @@ app.get('/eventForm', (req, res) => {
 // To store data into the db
 app.post('/eventForm/add', (req, res) => {
     const eventDetails = req.body;
-    let sql = `INSERT INTO etable (ename , edate, etime, price, uuid) VALUES ("${eventDetails.ename}", "${eventDetails.date}", "${eventDetails.time}", ${eventDetails.price}, "${uuidv4()}")`;
+    let sql = `INSERT INTO etable (ename , edate, etime, price, location, uuid) VALUES ("${eventDetails.ename}", "${eventDetails.date}", "${eventDetails.time}", ${eventDetails.price}, "${eventDetails.location}", "${uuidv4()}")`;
     db.query(sql, (err, data) => {
         if(err){
             throw err;
         }
         console.log("Data successfully inserted");
     });
-    res.redirect("/");
+    res.redirect("/event-details");
 });
+
+// To edit event form
+app.get('/eventForm/edit/:id', (req, res) => {
+    const {id} = req.params;
+    let sql = `SELECT * FROM etable WHERE uuid = "${id}"`;
+    db.query(sql, (err, data) =>{
+        if(err){
+            throw err;
+        }
+        res.render("editEventForm", { title: "Update event form", eventData: data[0]});
+    });
+});
+
+// Updating edited form
+app.post('/eventForm/edit/:id', (req, res) =>{
+    const {id} = req.params;
+    const eventDetails = req.body;
+    let sql = `UPDATE etable SET ename="${eventDetails.ename}", edate="${eventDetails.date}", etime="${eventDetails.time}", price=${eventDetails.price}, location="${eventDetails.location}" WHERE uuid = "${id}"`;
+    console.log(sql);
+    db.query(sql, (err, data) => {
+        if(err){
+            throw err;
+        }
+        console.log("Data successfully updated");
+    });
+    res.redirect("/event-details");
+})
 
 // To fetch data from the database
 app.get('/event-details', (req, res) =>{

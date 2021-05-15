@@ -1,0 +1,32 @@
+
+<%- include ("partials/header") %> 
+
+<div class="container">
+    <div class="container card">
+        <h1 class="text-center mb-3">Create an Event</h1>
+        <div id="center">
+            <form action="/eventForm/edit/<%= eventData.uuid %>" method="POST">
+                <div class="form-group mb-3">
+                    <input id= 'ename' class= "form-control" type="text" value="<%= eventData.ename %> " name="ename" placeholder="Event Name">
+                </div>
+                <div class="form-group mb-3">
+                    <input id="date" class= "form-control" type="text" value="<%= eventData.price %> " name="price" placeholder="Price">
+                </div>
+                <div class="form-group mb-3">
+                    <input id="location" class= "form-control" type="text" value="<%= eventData.location %> " name="location" placeholder="Location">
+                </div>
+                <div class="form-group mb-3">
+                    <input id="time" class= "form-control" type="text" value="<%= eventData.etime %>" name="time" placeholder="Time of Event">
+                </div>
+                <div class="form-group mb-3">
+                    <input id="date" class= "form-control" type="text" value="<%= eventData.edate %> " name="date" placeholder="Date">
+                </div>
+                <div class="d-grid gap-2">
+                    <button class="btn btn-outline-success" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include ("partials/footer") %> 
