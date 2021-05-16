@@ -4,7 +4,7 @@
     <div class="container card">
         <h1 class="text-center mb-3">Add a Participant</h1>
         <div id="center">
-            <form action="/participantForm" method="POST">
+            <form action="/event/addParticipant/<%= id  %> " method="POST">
                 <div class="form-group mb-3">
                     <input class= "form-control" type="text" name="name" placeholder="Name">
                 </div>
@@ -15,7 +15,7 @@
                     <input class= "form-control" type="text" name="age" placeholder="Age">
                 </div>
                 <div class="d-grid gap-2">
-                    <button class="btn btn-outline-success" type="button">Submit</button>
+                    <button class="btn btn-outline-success" type="submit">Submit</button>
                 </div>
             </form>
         </div>

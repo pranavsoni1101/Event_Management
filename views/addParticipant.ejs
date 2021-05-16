@@ -9,8 +9,8 @@
         <th>Time</th>
         <th>Price</th>
         <th>No. of Participants</th>
-        <th>Edit</th>
-        <th>Delete</th>
+        <th>View Event</th>
+        <th>Add Participant</th>
     </tr>
 
     <%
@@ -26,8 +26,8 @@
                 <td><%= data.etime %></td>
                 <td><%= data.price %></td>
                 <td><%= data.participants %></td>
-                <td><a class="btn btn-outline-warning"  href="/eventForm/edit/<%=data.uuid%>">Edit</a></td>
-                <td><a class="btn btn-outline-danger"  href="/event/deleteParticipants/<%=data.uuid%>">Delete</a></td>
+                <td><a class="btn btn-outline-info"  href="/displayEventParticipants<%=data.uuid%>">View Event</a></td>
+                <td><a class="btn btn-outline-success"  href="/event/addParticipant/<%=data.uuid%>">Add Participants</a></td>
             </tr>
             <% 
                 i++; }) 
