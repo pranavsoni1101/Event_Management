@@ -27,7 +27,11 @@
                 <td><%= data.price %></td>
                 <td><%= data.participants %></td>
                 <td><a class="btn btn-outline-warning"  href="/eventForm/edit/<%=data.uuid%>">Edit</a></td>
-                <td><a class="btn btn-outline-danger"  href="/event/deleteParticipants/<%=data.uuid%>">Delete</a></td>
+                <td>
+                    <form action="/event/deleteEvent/<%= data.uuid %>?_method=DELETE" method="POST">
+                        <button class="btn btn-outline-danger">Delete</button>
+                    </form>
+                </td>
             </tr>
             <% 
                 i++; }) 
@@ -37,7 +41,7 @@
         else { 
     %>
     <tr>
-        <td>No Data Found1</td>
+        <td>No Data Found</td>
     </tr>
     <% } %>
 </table>

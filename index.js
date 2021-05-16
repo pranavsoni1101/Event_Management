@@ -1,12 +1,14 @@
-const express      = require("express");
-const app          = express();
-const {v4: uuidv4} = require("uuid");
+const express        = require("express");
+const app            = express();
+const {v4: uuidv4}   = require("uuid");
+const methodOverride = require("method-override");
 const db           = require('../Event_Management/databse');
 
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + "/public"));
 app.use(express.json());
 app.use(express.urlencoded());
+app.use(methodOverride('_method'));
 
 // Setting the Routes
 // '/' = Root route
@@ -32,7 +34,7 @@ app.get('/eventForm', (req, res) => {
 // To store data into the db
 app.post('/eventForm/add', (req, res) => {
     const eventDetails = req.body;
-    let sql = `INSERT INTO etable (ename , edate, etime, price, location, uuid) VALUES ("${eventDetails.ename}", "${eventDetails.date}", "${eventDetails.time}", ${eventDetails.price}, "${eventDetails.location}", "${uuidv4()}")`;
+    let sql = `INSERT INTO etable (ename , edate, etime, price, location, uuid, participants) VALUES ("${eventDetails.ename}", "${eventDetails.date}", "${eventDetails.time}", ${eventDetails.price}, "${eventDetails.location}", "${uuidv4()}", "0")`;
     db.query(sql, (err, data) => {
         if(err){
             throw err;
@@ -81,10 +83,17 @@ app.get('/event-details', (req, res) =>{
 });
 
 // To show delete participants page
-app.get('/event/deleteParticipants/:id', (req,res) => {
+app.delete('/event/deleteEvent/:id', (req,res) => {
     const {id} = req.params;
-    
-})
+    let sql = `DELETE etable, ptable FROM etable INNER JOIN ptable ON ptable.euuid = etable.uuid WHERE etable.uuid = "${id}"`;
+    db.query(sql, (err, data) => {
+        if(err){
+            throw err;
+        }
+        console.log("Successfully deleted the event and the participants in the event");
+    }); 
+    res.redirect('/event-details');
+});
 
 //Participant Registration form
 app.get('/event/addParticipant/:id', (req, res) => {
