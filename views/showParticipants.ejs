@@ -1,0 +1,43 @@
+<%- include('partials/header') %> 
+
+<div class="container">
+    <table class="table table-dark table-striped">
+        <tr>
+            <th>Sr. No.</th>
+            <th>Participant Name</th>
+            <th>Email</th>
+            <th>Age</th>
+            <th>Delete</th>
+        </tr>
+    
+        <%
+            if(eventData.length !=0){
+                let i = 1;
+                eventData.forEach((data) => {  
+         %> 
+                <tr>
+                    <td> <%= i; %> </td>
+                    <td><%= data.pname %></td>
+                    <td><%= data.pemail %></td>
+                    <td><%= data.age %></td>
+                    <td>
+                        <form action="/displayParticipants/<%= data.uuid %>?/_method=DELETE" method="POST">
+                            <button class="btn btn-outline-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                <% 
+                    i++; }) 
+                %>
+        <% 
+            }
+            else { 
+        %>
+        <tr>
+            <td>No Data Found</td>
+        </tr>
+        <% } %>
+    </table>
+</div>
+
+<%- include('partials/footer') %> 

@@ -105,7 +105,7 @@ app.get('/event/addParticipant/:id', (req, res) => {
 app.post('/event/addParticipant/:id', (req, res) => {
     const {id} = req.params;
     const eventDetails = req.body;
-    let sql = `INSERT INTO ptable (pname , pemail, age, uuid, euuid) VALUES ("${eventDetails.name}", "${eventDetails.email}", "${eventDetails.age}", "${uuidv4()}", "${id}")`;
+    let sql = `INSERT INTO ptable (pname , pemail, age, puuid, euuid) VALUES ("${eventDetails.name}", "${eventDetails.email}", "${eventDetails.age}", "${uuidv4()}", "${id}")`;
     db.query(sql, (err, data) => {
         if(err){
             throw err;
@@ -130,6 +130,20 @@ app.get('/addParticipant', (req, res) =>{
             throw err;
         }
         res.render("addParticipant", {title: "Event List", eventData: data});
+    });
+});
+
+// Displaying participants of a particular event
+app.get('/displayEventParticipants/:id', (req, res) => {
+    const {id} = req.params;
+    let sql = `SELECT * FROM ptable INNER JOIN etable on ptable.euuid = "${id}"`;
+    db.query(sql, (err, data) => {
+        if(err){
+            throw err;
+        }
+        console.log("Successfully fetched participants from event");
+        console.log(data);
+        res.render("showParticipants", { title: "Fetching Participants" , eventData: data});
     });
 });
 
